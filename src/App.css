@@ -1,38 +1,174 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap');
+
 .App {
   text-align: center;
+  color: #6C727F
 }
-
+*{
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  height: 42vh;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo{
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-
 .App-header {
-  background-color: #282c34;
+  position: relative;
+  min-height: 42vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+.main{
+  position: relative;
+  background-color: #1B1D1F;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center
+}
+.page{
+  position: absolute;
+  top: -68px;
+  background-color: #1B1D1F;
+  border: 1px solid #282B30;
+  border-radius: 15px;
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+.home-header{
+  color: #6C727F;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+  margin-top: 25px;
+  margin-right: 20px;
+}
+.content{
+  margin-left: 40px;
+}
+.searchinput{
+  background-color: #282B30;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 14px;
+  width: 20vw;
+  padding-left: 45px;
+}
+.searchinput:focus{
+  outline: none;
+}
+form{
+  position: relative;
+}
+.search{
+  position: absolute;
+  top: 12px;
+  left: 15px;
+}
+.filter{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 10px;  
+}
+.filter p{
+  letter-spacing: 0.5px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: 'Be Vietnam Pro', sans-serif;;
+}
+.filter-1{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.select {
+  border: 2px solid #282B30;
+  background-color: #1B1D1F;
+  border-radius: 10px;
+  padding: 5px 10px 5px 5px;
+  font-size: 15px;
+}
+select{
+  background-color: #1B1D1F;
+  border: none;
+  color: #D2D5DA;
+  padding: 2px 8px 2px 2px;
+  width: 250px;
+  font-weight: 700px;
+}
+select:focus{
+  outline: none;
+}
+.filter-2, .filter-3{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-top: 15px;
+}
+.options{
+  display: flex;
+  flex-direction: column;
+}
+.option1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.option{
+  background-color: #1B1D1F;
+  margin: 15px 0px 0px 0px;
+  border: none;
+  color:#6C727F;
+  font-weight: 800;
+  transition: padding 0.25s;
+}
+.option:hover{
+  background-color: #282B30;
+  border-radius: 12px;
+  padding: 10px 10px 10px 10px;
+  color: #D2D5DA;
+}
+.home-page{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 15px;
+    text-align: center;
+    margin:5px;
+}
+input[type=checkbox] {
+  transform: scale(1.25);
+  margin: 10px 15px 10px 0;
 }
 
-.App-link {
-  color: #61dafb;
+.filter-3 label{
+  color: #D2D5DA;
+  font-size: 13px;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.table{
+  overflow: hidden;
+}
+table{
+  text-align: left;
+}
+table tr th{
+  padding: 5px 50px 5px 5px;
+  font-size: 13px;
+}
+table tr td{
+  color: #D2D5DA;
+  padding: 5px 50px 5px 5px;;
 }
