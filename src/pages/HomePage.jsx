@@ -1,22 +1,35 @@
 import React,{useEffect, useState} from 'react'
+import axiosRetry from 'axios-retry';
 import axios from 'axios';
 import '../App.css';
 import { Link } from 'react-router-dom';
 const HomePage = () => {
   const [loading, setLoading] = useState(false);
+
+  axiosRetry(axios, {
+    retries: 3, 
+    retryDelay: (retryCount) => {
+      return retryCount * 2000;
+    },
+    retryCondition: (error) => {
+      return axiosRetry.isNetworkOrIdempotentRequestError(error) || error.response.status >= 500;
+    },
+  });
+
   useEffect(() => {
     const fetchCountries = async () => {
       setLoading(true);
-
       try {
         const response = await axios.get('https://restcountries.com/v3.1/all', {
-          timeout: 10000,
+          timeout: 20000,
         });
         setCountries(response.data);
         setFilteredCountries(response.data);
-      } catch (error) {
+      } 
+      catch (error) {
         console.log(error.message)
-      } finally {
+      } 
+      finally {
         setLoading(false);
       }
     };
