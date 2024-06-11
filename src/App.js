@@ -13,14 +13,12 @@ function App() {
         <img src={logo} className='logo' alt='logo'></img>
       </header>
       <main className='main'>
-        <div className='page'>
           <BrowserRouter>
           <Routes>
             <Route path='/' Component={HomePage}></Route>
             <Route path='/:country' Component={CountryPage}></Route>
           </Routes>
           </BrowserRouter>
-        </div>
       </main>
     </div>
   );

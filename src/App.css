@@ -9,7 +9,8 @@
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 .App-logo {
-  height: 42vh;
+  height: 40vh;
+  width: 100vw;
 }
 .logo{
   position: absolute;
@@ -19,7 +20,8 @@
 }
 .App-header {
   position: relative;
-  min-height: 42vh;
+  min-width: 100vw;
+  min-height: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +30,7 @@
 .main{
   position: relative;
   background-color: #1B1D1F;
-  min-height: 100vh;
+  min-height: 110vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -40,9 +42,9 @@
   background-color: #1B1D1F;
   border: 1px solid #282B30;
   border-radius: 15px;
-  height: 80vh;
+  height: 110vh;
   width: 80vw;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 .home-header{
   color: #6C727F;
@@ -126,7 +128,8 @@ select:focus{
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
+  margin-top: 5px;
 }
 .option{
   background-color: #1B1D1F;
@@ -141,6 +144,14 @@ select:focus{
   border-radius: 12px;
   padding: 10px 10px 10px 10px;
   color: #D2D5DA;
+}
+.option-select{
+  background-color: #282B30;
+  border-radius: 12px;
+  padding: 10px 10px 10px 10px;
+  color: #D2D5DA;
+  border: none;
+  margin-top: 10px;
 }
 .home-page{
     display: grid;
@@ -183,6 +194,13 @@ table tr td{
   z-index: 2;
 }
 .country-page{
+  position: absolute;
+  top: -68px;
+  background-color: #1B1D1F;
+  border: 1px solid #282B30;
+  border-radius: 15px;
+  height: 100vh;
+  width: 50vw;
   color: #D2D5DA;
 }
 .population-area{
@@ -219,6 +237,7 @@ table tr td{
   display: flex;
   flex-direction: row;
   gap: 5px;
+  overflow: hidden;
 }
 .neighbouring{
   display: flex;
@@ -229,4 +248,12 @@ table tr td{
   display: flex;
   flex-direction: row;
   gap: 12px;
+}
+.neigh-list{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.neigh-list p{
+  font-size: 10px;
 }

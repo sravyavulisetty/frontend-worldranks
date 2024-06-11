@@ -18,7 +18,8 @@ const HomePage = () => {
   const [filteredCountries, setFilteredCountries] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState();
   const [selectedFilter, setSelectedFilter] = useState();
-  
+  const [selectedBtns, setSelectedBtns] = useState([]);
+
 
   const handleChange = (e) => {
     setSelectedCountry(e.target.value);
@@ -45,31 +46,64 @@ const HomePage = () => {
     const value = e.target.value;
     setSelectedFilter(e.target.value);
     if(value === 'population'){
-      setFilteredCountries((countries.sort((a,b) => a.population - b.population)));
+      setFilteredCountries((filteredCountries.sort((a,b) => a.population - b.population)));
     }
     else if(value === 'area'){
-      setFilteredCountries((countries.sort((a,b) => a.area - b.area)))
+      setFilteredCountries((filteredCountries.sort((a,b) => a.area - b.area)))
     }
     else if(value === 'name'){
-      setFilteredCountries((countries.sort((a, b) => a.name.common.localeCompare(b.name.common)))) ;
+      setFilteredCountries((filteredCountries.sort((a, b) => a.name.common.localeCompare(b.name.common)))) ;
     }
   }
 
   const handleBtn = (value) => {
-    const regionCountries = countries.filter((country) => country.region === value);
-    setFilteredCountries(regionCountries);
-  }
-
-  const handleCheck = (value) => {
-    if(value === 'independent'){
-      setFilteredCountries((countries.filter((country) => country.independent === true)))
+    if(!selectedBtns.includes(value)){
+      setSelectedBtns((prev) => {
+        const newSelectedBtns = [...prev, value];
+        const filterCountries = (btn) => {
+          return countries.filter((country) => country.region === btn);
+        };
+    
+        const regionCountries = newSelectedBtns.flatMap((btn) => filterCountries(btn));
+        setFilteredCountries(regionCountries);
+        return newSelectedBtns;
+      });
     }
-    else{
-      setFilteredCountries((countries.filter((country) => country.independent === false)))
+    else if(selectedBtns.includes(value)){
+      const unselected = selectedBtns.filter((btn) => btn !== value);
+      setSelectedBtns(unselected);
+      if(unselected.length===0){
+        const filtered = [...countries];
+        setFilteredCountries(filtered);
+      }
+      else{
+        const filterCountries = (btn) => {
+          return countries.filter((country) => country.region === btn);
+        };
+        const regionCountries = unselected.flatMap((btn) => filterCountries(btn));
+        setFilteredCountries(regionCountries);
+      } 
+    } 
+  };
+
+  const handleCheckbox = (e) => {
+    const {value, checked} = e.target;
+    const originalData = [...filteredCountries];
+    if(checked && value === 'independent'){
+      const a = filteredCountries.filter((country) => country.independent === true)
+      setFilteredCountries(a);
+    }
+    else if(checked && value === 'united nations'){
+      const a = filteredCountries.filter((country) => country.independent === false)
+      setFilteredCountries(a);
+    }
+    if(!checked && (value === 'independent' || 'united nations')){
+        setFilteredCountries(originalData);
     }
   }
 
   return (
+    <div className='page'>
     <div className='content'>
       <div className='home-header'>
         <h4>Found {filteredCountries.length} countries</h4>
@@ -99,28 +133,28 @@ const HomePage = () => {
             <p>Region</p>
             <div className='options'>
                 <div className='option1'>
-                  <button className='option' onClick={(e)=>handleBtn('Americas',e)}>Americas</button>
-                  <button className='option' onClick={(e)=>handleBtn('Antarctic',e)}>Antarctic</button>
+                  <button className={selectedBtns.includes("Americas") ? "option-select" : "option"} onClick={(e)=>handleBtn('Americas',e)}>Americas</button>
+                  <button className={selectedBtns.includes("Antarctic") ? "option-select" : "option"} onClick={(e)=>handleBtn('Antarctic',e)}>Antarctic</button>
                 </div>
                 <div className='option1'>
-                  <button className='option' onClick={(e)=>handleBtn('Africa', e)}>Africa</button>
-                  <button className='option' onClick={(e)=>handleBtn('Asia', e)}>Asia</button>
-                  <button className='option' onClick={(e)=>handleBtn('Europe',e)}>Europe</button>
+                  <button className={selectedBtns.includes("Africa") ? "option-select" : "option"} onClick={(e)=>handleBtn('Africa', e)}>Africa</button>
+                  <button className={selectedBtns.includes("Asia") ? "option-select" : "option"} onClick={(e)=>handleBtn('Asia', e)}>Asia</button>
+                  <button className={selectedBtns.includes("Europe") ? "option-select" : "option"} onClick={(e)=>handleBtn('Europe',e)}>Europe</button>
                 </div>
                 <div className='option1'>
-                  <button className='option' onClick={(e)=>handleBtn('Oceania',e)}>Oceania</button>
+                  <button className={selectedBtns.includes("Oceania") ? "option-select" : "option"} onClick={(e)=>handleBtn('Oceania',e)}>Oceania</button>
                 </div>
             </div>
         </div>
         <div className='filter-3'>
             <p>Status</p>
             <div className='option1'>
-              <input type="checkbox" id='UN' onChange={()=>handleCheck('UN')}/>
-              <label htmlFor='UN'>Member of the United Nations</label>
+              <input type="checkbox" id='united nations' value='united nations' onChange={(e) => handleCheckbox(e)}/>
+              <label htmlFor='united nations'>Member of the United Nations</label>
             </div>
             <div className='option1'>
-              <input type="checkbox" id='indp' onChange={()=>handleCheck('independent')}/>
-              <label htmlFor='indp'>Independent</label>
+              <input type="checkbox" id='independent' value='independent' onChange={(e) => handleCheckbox(e)}/>
+              <label htmlFor='independent'>Independent</label>
             </div>
         </div>
         </div>
@@ -150,6 +184,7 @@ const HomePage = () => {
         </div>
 
       </div>
+    </div>
     </div>
   )
 }

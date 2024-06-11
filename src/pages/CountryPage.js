@@ -4,16 +4,19 @@ import '../App.css';
 
 const CountryPage = () => {
   const { country } = useParams();
-  const [selectedCountry, setSelectedCountry] = useState('India');
+  const [selectedCountry, setSelectedCountry] = useState();
+  const [loading, setLoading] = useState(true);
   const [countries, setCountries] = useState([]);
-  const getData = async() =>{
-    await fetch(`https://restcountries.com/v3.1/name/${country.trim()}?fullText=true`)
+  const getData = () =>{
+    fetch(`https://restcountries.com/v3.1/name/${country.trim()}?fullText=true`)
     .then(response => response.json())
     .then(data => {
       setSelectedCountry(data[0]);
+      setLoading(false);
     })
     .catch(error => {
       console.log(error)
+      setLoading(false);
     })
   }
 
@@ -27,14 +30,15 @@ const CountryPage = () => {
     .catch(error => {
         console.log(error)
     })
-  },[country])
+  },[selectedCountry])
 
-  const isNeigbouring = (value) => {
+  const isNeighbouring = (value) => {
     const foundCountry = countries.find((country) => country.cca3 === value);
     if(foundCountry){
         return foundCountry;
     }
   }
+  if (loading) return <div style={{marginTop: '-400px'}}>Loading...</div>;
 
   return (
     <div className='country-page'>
@@ -66,18 +70,19 @@ const CountryPage = () => {
         </div>
         <div className='languages'>
             <p>Language</p>
-            <div className='list'>{Object.entries(selectedCountry.languages)?.map(([key, value])=>(
-                <p>{value}</p>
+            <div className='list'>
+            {selectedCountry.languages && Object.entries(selectedCountry.languages).slice(0,5).map(([key, value], idx) => (
+              <p key={key}>{idx!==0 ? ',' + value : '' + value}</p>
             ))}
-            </div>
+          </div>
         </div>
         <div className='languages'>
             <p>Currencies</p>
-            <p>{selectedCountry.currencies.INR.name}</p>
-            {/* {<div className='list'>{Object.entries(selectedCountry?.currencies.INR).map(([key, value])=>(
-                <p>{value}</p>
+            <div className='list'>
+            {Object.entries(selectedCountry.currencies).map(([key, value], idx) => (
+                <p>{idx!==0 ? ',' + value.name : '' + value.name}</p>
             ))}
-            </div>}  */}
+            </div>
         </div>
         <div className='languages'>
             <p>Continents</p>
@@ -86,10 +91,16 @@ const CountryPage = () => {
         <div className='neighbouring'>
             <p>Neigbouring Countries</p>
             <div className='neigh-countries'>
-                {selectedCountry.borders.map((border) => (
-                    <img src={isNeigbouring(border)?.flags.svg} alt='flag' style={{width:"70px", height: "50px"}}></img>
-                ))}
-            </div>
+            {selectedCountry.borders? selectedCountry.borders.map((border) => {
+              const neighbour = isNeighbouring(border);
+              return neighbour ? (
+                <div className='neigh-list'>
+                    <img key={border} src={neighbour.flags.svg} alt={`${neighbour.name.common} flag`} style={{ width: "70px", height: "50px" }} />
+                    <p>{neighbour.name.common}</p>
+                </div>
+              ) : null;
+            }) : <p style={{fontSize: "10px", marginTop: "-10px"}}>No neighbouring countries</p>}
+          </div>
         </div>
       </div> 
     </div>
