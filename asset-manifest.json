@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/sravyavulisetty/frontend-worldranks/static/css/main.6105d0af.css",
-    "main.js": "/sravyavulisetty/frontend-worldranks/static/js/main.0e997060.js",
-    "static/js/592.2a67fbd9.chunk.js": "/sravyavulisetty/frontend-worldranks/static/js/592.2a67fbd9.chunk.js",
-    "static/media/hero-image-wr.jpg": "/sravyavulisetty/frontend-worldranks/static/media/hero-image-wr.dcee4c10f3af0d78fcb7.jpg",
-    "static/media/Logo.svg": "/sravyavulisetty/frontend-worldranks/static/media/Logo.0df25db9b1a0cbd724aba2918429a893.svg",
-    "index.html": "/sravyavulisetty/frontend-worldranks/index.html",
-    "main.6105d0af.css.map": "/sravyavulisetty/frontend-worldranks/static/css/main.6105d0af.css.map",
-    "main.0e997060.js.map": "/sravyavulisetty/frontend-worldranks/static/js/main.0e997060.js.map",
-    "592.2a67fbd9.chunk.js.map": "/sravyavulisetty/frontend-worldranks/static/js/592.2a67fbd9.chunk.js.map"
+    "main.css": "/frontend-worldranks/static/css/main.6105d0af.css",
+    "main.js": "/frontend-worldranks/static/js/main.46e84a7e.js",
+    "static/js/592.2a67fbd9.chunk.js": "/frontend-worldranks/static/js/592.2a67fbd9.chunk.js",
+    "static/media/hero-image-wr.jpg": "/frontend-worldranks/static/media/hero-image-wr.dcee4c10f3af0d78fcb7.jpg",
+    "static/media/Logo.svg": "/frontend-worldranks/static/media/Logo.0df25db9b1a0cbd724aba2918429a893.svg",
+    "index.html": "/frontend-worldranks/index.html",
+    "main.6105d0af.css.map": "/frontend-worldranks/static/css/main.6105d0af.css.map",
+    "main.46e84a7e.js.map": "/frontend-worldranks/static/js/main.46e84a7e.js.map",
+    "592.2a67fbd9.chunk.js.map": "/frontend-worldranks/static/js/592.2a67fbd9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6105d0af.css",
-    "static/js/main.0e997060.js"
+    "static/js/main.46e84a7e.js"
   ]
 }
