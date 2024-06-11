@@ -2,22 +2,26 @@ import React,{useEffect, useState} from 'react'
 import '../App.css';
 import { Link } from 'react-router-dom';
 const HomePage = () => {
-  useEffect(()=>{
-    fetch('https://restcountries.com/v3.1/all')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.statusText}`);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const fetchCountries = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.get('https://restcountries.com/v3.1/all', {
+          timeout: 10000,
+        });
+        setCountries(response.data);
+        setFilteredCountries(response.data);
+      } catch (error) {
+        setError(error.message || 'Failed to fetch data');
+      } finally {
+        setLoading(false);
       }
-      return response.json();
-    })
-    .then(data => {
-      setCountries(data);
-      setFilteredCountries(data);
-    })
-    .catch(error => {
-      console.log(error)
-    })
-  },[])
+    };
+
+    fetchCountries();
+  }, []);
 
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState([]);
@@ -105,6 +109,10 @@ const HomePage = () => {
     if(!checked && (value === 'independent' || 'united nations')){
         setFilteredCountries(originalData);
     }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (
