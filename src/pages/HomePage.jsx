@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react'
+import axios from 'axios';
 import '../App.css';
 import { Link } from 'react-router-dom';
 const HomePage = () => {
@@ -6,7 +7,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchCountries = async () => {
       setLoading(true);
-      setError(null);
+
       try {
         const response = await axios.get('https://restcountries.com/v3.1/all', {
           timeout: 10000,
@@ -14,7 +15,7 @@ const HomePage = () => {
         setCountries(response.data);
         setFilteredCountries(response.data);
       } catch (error) {
-        setError(error.message || 'Failed to fetch data');
+        console.log(error.message)
       } finally {
         setLoading(false);
       }
